@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProductSelectPage: View {
     @Binding var user: User
-    @StateObject private var cart = Cart()
+    @StateObject var cart: Cart
     
     let products: [Product]
     
@@ -48,9 +48,26 @@ struct ProductSelectPage: View {
                 } else {
                     cart.items.append(CartItem(id: UUID(), product: product, quantity: newValue))
                 }
+                printCartItemDetails(for: product)
+                updateUserOrder()
             }
         )
         return quantity
+    }
+    
+    private func updateUserOrder() {
+        let selectedProducts = cart.items.filter { $0.quantity > 0 }.map { $0.product }
+        let order = Order(id: UUID(), products: selectedProducts, totalPrice: calculateTotalPrice())
+        user.orders.append(order)
+    }
+    
+    private func printCartItemDetails(for product: Product) {
+        if let cartItem = cart.items.first(where: { $0.product.id == product.id }) {
+            print("點擊 stepper")
+            print("Product: \(product.name)")
+            print("Quantity: \(cartItem.quantity)")
+            print("=====")
+        }
     }
 
     private func formatPrice(_ price: Decimal) -> String {
@@ -69,7 +86,9 @@ struct ProductSelectPage: View {
         
         // Clear cart and selected products
         cart.items.removeAll()
-        user.selectedProducts.removeAll()
+        
+        // Reset cart
+        cart.reset()
     }
     
     private func calculateTotalPrice() -> Decimal {
@@ -77,20 +96,23 @@ struct ProductSelectPage: View {
         return total
     }
     
+    
+    
     private func printOrderDetails() {
+        print("點撃下單")
         print("User: \(user.name)")
         print("Total Orders: \(user.orders.count)")
         
         for order in user.orders {
             print("Order ID: \(order.id)")
-            print("Total Price: $\(String(format: "%.2f", order.totalPrice as NSNumber))")
+            print("Total Price: \(formatPrice(order.totalPrice))")
             
             print("Products:")
-            for product in order.products {
-                print("- \(product.name) - $\(String(format: "%.2f", product.price as NSNumber))")
+            for cartItem in cart.items {
+                let product = cartItem.product
+                let quantity = cartItem.quantity
+                print("- \(product.name) - \(quantity) Qty - \(formatPrice(product.price))")
             }
-            
-            print("---")
         }
         
         print("=====")
@@ -103,44 +125,41 @@ struct ContentView: View {
         User(id: UUID(), name: "Alice", selectedProducts: [], orders: []),
         User(id: UUID(), name: "Bob", selectedProducts: [], orders: [])
     ]
-
     
-    @State private var selectedUserID: UUID = UUID()
-       
+    @StateObject private var cart = Cart()
+    @State private var selectedUserIndex: Int = 0
+    
     var selectedUser: User {
-       users.first(where: { $0.id == selectedUserID }) ?? users[0]
+        users[selectedUserIndex]
     }
-
+    
     var body: some View {
-       VStack {
-           ScrollView(.horizontal) {
-               LazyHStack(spacing: 10) {
-                   ForEach(users) { user in
-                       Button(action: {
-                           selectedUserID = user.id
-                       }) {
-                           Text(user.name)
-                               .foregroundColor(user.id == selectedUserID ? .blue : .black)
-                       }
-                   }
-               }
-               .padding(.leading, 10)
-           }
-           .frame(height: 100)
-           Button("新增用戶") {
-               let newUser = User(id: UUID(), name: "新用戶", selectedProducts: [], orders: [])
-               users.append(newUser)
-               selectedUserID = newUser.id
-           }
-           
-           ProductSelectPage(user: Binding(get: {
-               selectedUser
-           }, set: { newValue in
-               if let index = users.firstIndex(where: { $0.id == selectedUserID }) {
-                   users[index] = newValue
-               }
-           }), products: productData)
-       }
+        VStack {
+            ScrollView(.horizontal) {
+                LazyHStack(spacing: 10) {
+                    ForEach(users) { user in
+                        Button(action: {
+                            if let index = users.firstIndex(of: user) {
+                                selectedUserIndex = index
+                            }
+                        }) {
+                            Text(user.name)
+                                .foregroundColor(user.id == selectedUser.id ? .blue : .black)
+                        }
+                    }
+                }
+                .padding(.leading, 10)
+            }
+            .frame(height: 100)
+            
+            Button("新增用戶") {
+                let newUser = User(id: UUID(), name: "新用戶", selectedProducts: [], orders: [])
+                users.append(newUser)
+                selectedUserIndex = users.count - 1
+            }
+            
+            ProductSelectPage(user: $users[selectedUserIndex], cart: cart, products: productData)
+        }
     }
 }
 
