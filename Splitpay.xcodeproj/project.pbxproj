@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		5944DEDD2A512AF10015B054 /* SplitpayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5944DEDC2A512AF10015B054 /* SplitpayApp.swift */; };
-		5944DEDF2A512AF10015B054 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5944DEDE2A512AF10015B054 /* ContentView.swift */; };
+		5944DEDF2A512AF10015B054 /* ProductSelectPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5944DEDE2A512AF10015B054 /* ProductSelectPage.swift */; };
 		5944DEE12A512AF20015B054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5944DEE02A512AF20015B054 /* Assets.xcassets */; };
 		5944DEE42A512AF20015B054 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5944DEE32A512AF20015B054 /* Preview Assets.xcassets */; };
 		5944DEEE2A512AF20015B054 /* SplitpayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5944DEED2A512AF20015B054 /* SplitpayTests.swift */; };
 		5944DEF82A512AF20015B054 /* SplitpayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5944DEF72A512AF20015B054 /* SplitpayUITests.swift */; };
 		5944DEFA2A512AF20015B054 /* SplitpayUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5944DEF92A512AF20015B054 /* SplitpayUITestsLaunchTests.swift */; };
+		5944DF072A513C380015B054 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5944DF062A513C380015B054 /* Model.swift */; };
+		5944DF092A5156B70015B054 /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5944DF082A5156B70015B054 /* UserListView.swift */; };
+		5944DF0B2A5156C80015B054 /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5944DF0A2A5156C80015B054 /* ProductListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +39,7 @@
 /* Begin PBXFileReference section */
 		5944DED92A512AF10015B054 /* Splitpay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Splitpay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5944DEDC2A512AF10015B054 /* SplitpayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitpayApp.swift; sourceTree = "<group>"; };
-		5944DEDE2A512AF10015B054 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5944DEDE2A512AF10015B054 /* ProductSelectPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSelectPage.swift; sourceTree = "<group>"; };
 		5944DEE02A512AF20015B054 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5944DEE32A512AF20015B054 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5944DEE92A512AF20015B054 /* SplitpayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SplitpayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +47,9 @@
 		5944DEF32A512AF20015B054 /* SplitpayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SplitpayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5944DEF72A512AF20015B054 /* SplitpayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitpayUITests.swift; sourceTree = "<group>"; };
 		5944DEF92A512AF20015B054 /* SplitpayUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitpayUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5944DF062A513C380015B054 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		5944DF082A5156B70015B054 /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
+		5944DF0A2A5156C80015B054 /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +101,10 @@
 			isa = PBXGroup;
 			children = (
 				5944DEDC2A512AF10015B054 /* SplitpayApp.swift */,
-				5944DEDE2A512AF10015B054 /* ContentView.swift */,
+				5944DEDE2A512AF10015B054 /* ProductSelectPage.swift */,
+				5944DF082A5156B70015B054 /* UserListView.swift */,
+				5944DF0A2A5156C80015B054 /* ProductListView.swift */,
+				5944DF062A513C380015B054 /* Model.swift */,
 				5944DEE02A512AF20015B054 /* Assets.xcassets */,
 				5944DEE22A512AF20015B054 /* Preview Content */,
 			);
@@ -257,8 +266,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5944DEDF2A512AF10015B054 /* ContentView.swift in Sources */,
+				5944DF072A513C380015B054 /* Model.swift in Sources */,
+				5944DEDF2A512AF10015B054 /* ProductSelectPage.swift in Sources */,
 				5944DEDD2A512AF10015B054 /* SplitpayApp.swift in Sources */,
+				5944DF092A5156B70015B054 /* UserListView.swift in Sources */,
+				5944DF0B2A5156C80015B054 /* ProductListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
